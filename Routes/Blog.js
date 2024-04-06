@@ -3,6 +3,9 @@ const router = express.Router();
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 const path = require("path");
+const passport = require("passport");
+const passportJwt = require("../Middlewares/PassportJWT");
+const requireAuth = passport.authenticate("jwt", { session: false });
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -35,7 +38,7 @@ const {
   getIdBlog,
 } = require("../Controllers/Blog");
 
-router.get("/", getAllBlog);
+router.get("/", requireAuth, getAllBlog);
 router.get("/:id", getIdBlog);
 router.post("/", upload, postCreateBlog);
 router.put("/:id", upload, putUpdateBlog);

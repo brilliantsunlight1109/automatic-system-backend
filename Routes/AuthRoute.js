@@ -1,4 +1,9 @@
 const { Signup, Login } = require("../Controllers/AuthController");
+const jwt = require("jsonwebtoken");
+//passport
+const passport = require("passport");
+const passportJwt = require("../Middlewares/PassportJWT");
+const requireAuth = passport.authenticate("jwt", { session: false });
 const {
   GeneralSetting,
   putUpdateSetting,
@@ -7,14 +12,11 @@ const {
 } = require("../Controllers/Setting");
 const { userVerification } = require("../Middlewares/AuthMiddleware");
 const router = require("express").Router();
-// const passport = require("passport");
-
-// const requireAuth = passport.authenticate("jwt", { session: false });
 
 router.post("/", userVerification);
 router.post("/signup", Signup);
 router.post("/login", Login);
-router.get("/", GeneralSetting);
+router.get("/", requireAuth, GeneralSetting);
 router.put("/:id", putUpdateSetting);
 router.get("/:id", getIdSetting);
 router.delete("/:id", deleteSetting);
