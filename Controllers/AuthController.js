@@ -1,6 +1,10 @@
 const User = require("../Models/UserModel");
 const bcrypt = require("bcryptjs");
 const { createSecretToken } = require("../util/SecretToken");
+const jwt = require("jsonwebtoken");
+//passport
+const passport = require("passport");
+const passportJwt = require("../Middlewares/PassportJWT");
 
 module.exports.Signup = async (req, res, next) => {
   try {
@@ -102,9 +106,19 @@ module.exports.Login = async (req, res, next) => {
         withCredentials: true,
         httpOnly: false,
       });
-      res
-        .status(200)
-        .json({ message: "正確にログインしています。", success: true });
+      // generate access token
+      const accessToken = jwt.sign(
+        {
+          id: user._id,
+        },
+        "secret",
+        { expiresIn: "1d" }
+      );
+      res.status(200).json({
+        message: "正確にログインしています。",
+        success: true,
+        accessToken: accessToken,
+      });
     } else {
       return res.json({
         message: "管理部にお問い合わせください。",

@@ -1,5 +1,9 @@
 const express = require("express");
 const router = express.Router();
+//passport
+const passport = require("passport");
+const passportJwt = require("../Middlewares/PassportJWT");
+const requireAuth = passport.authenticate("jwt", { session: false });
 // const multer = require("multer");
 // const { v4: uuidv4 } = require("uuid");
 // const path = require("path");
@@ -31,7 +35,7 @@ const {
   getIdCoupon,
 } = require("../Controllers/Coupon");
 
-router.get("/", getAllCoupon);
+router.get("/",requireAuth, getAllCoupon);
 router.get("/:id", getIdCoupon);
 router.post("/", postCreateCoupon);
 router.put("/:id", putUpdateCoupon);

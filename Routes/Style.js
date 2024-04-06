@@ -4,6 +4,12 @@ const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 const path = require("path");
 
+const jwt = require("jsonwebtoken");
+//passport
+const passport = require("passport");
+const passportJwt = require("../Middlewares/PassportJWT");
+const requireAuth = passport.authenticate("jwt", { session: false });
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./images");
@@ -37,7 +43,7 @@ const {
   getIdStyle,
 } = require("../Controllers/Style");
 
-router.get("/", getAllStyle);
+router.get("/", requireAuth, getAllStyle);
 router.get("/:id", getIdStyle);
 router.post("/", upload, postCreateStyle);
 router.put("/:id", upload, putUpdateStyle);
