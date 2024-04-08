@@ -56,10 +56,9 @@ app.use("/api/coupon", Coupon);
 
 app.use("/api/synctime", SyncTime);
 
-app.use("/api/servercontrol", ServerControl);
+app.use("/api/severcontrol", ServerControl);
 
 app.use("/api/delete", Delete);
-
 
 // app.use("/api1/control", Control);
 
