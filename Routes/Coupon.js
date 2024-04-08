@@ -35,7 +35,7 @@ const {
   getIdCoupon,
 } = require("../Controllers/Coupon");
 
-router.get("/",requireAuth, getAllCoupon);
+router.get("/", getAllCoupon);
 router.get("/:id", getIdCoupon);
 router.post("/", postCreateCoupon);
 router.put("/:id", putUpdateCoupon);

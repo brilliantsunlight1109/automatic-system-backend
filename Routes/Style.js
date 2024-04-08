@@ -43,7 +43,7 @@ const {
   getIdStyle,
 } = require("../Controllers/Style");
 
-router.get("/", requireAuth, getAllStyle);
+router.get("/", getAllStyle);
 router.get("/:id", getIdStyle);
 router.post("/", upload, postCreateStyle);
 router.put("/:id", upload, putUpdateStyle);

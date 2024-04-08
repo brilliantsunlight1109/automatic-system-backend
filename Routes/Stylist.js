@@ -12,7 +12,7 @@ const {
   deleteStylist,
 } = require("../Controllers/Stylist");
 
-router.get("/", requireAuth, getAllStylist);
+router.get("/", getAllStylist);
 router.post("/", postCreateStylist);
 router.get("/:id", getIdStylist);
 router.put("/:id", putUpdateStylist);

@@ -18,7 +18,7 @@ module.exports.upsertServerControl = (req, res) => {
     );
 };
 
-module.exports.getServerControl = (req, res) => {
+module.exports.getIdServerControl = (req, res) => {
   const style_tokyo_id = req.params.style_tokyo_id;
   ServerControl.findOne({ style_tokyo_id: style_tokyo_id })
     .then((data) => {
@@ -32,6 +32,16 @@ module.exports.getServerControl = (req, res) => {
         .status(500)
         .json({ message: "Error fetching Coupon", error: err.message });
     });
+};
+
+module.exports.getServerControl = (req, res) => {
+  ServerControl.find()
+    .then((data) => res.json(data))
+    .catch((err) =>
+      res
+        .status(404)
+        .json({ message: "servercontrol not find", error: err.message })
+    );
 };
 // const ServerControl = require("../Models/ServerControl");
 // const { spawn } = require("child_process");
