@@ -17,9 +17,11 @@ const router = express.Router();
 
 const {
   upsertServerControl,
+  getIdServerControl,
   getServerControl,
 } = require("../Controllers/ServerControl");
 router.post("/delete_time", upsertServerControl);
-router.get("/:style_tokyo_id", getServerControl);
+router.get("/:style_tokyo_id", getIdServerControl);
+router.get("/", getServerControl);
 
 module.exports = router;

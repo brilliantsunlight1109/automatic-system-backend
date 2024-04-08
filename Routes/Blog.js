@@ -38,7 +38,7 @@ const {
   getIdBlog,
 } = require("../Controllers/Blog");
 
-router.get("/", requireAuth, getAllBlog);
+router.get("/", getAllBlog);
 router.get("/:id", getIdBlog);
 router.post("/", upload, postCreateBlog);
 router.put("/:id", upload, putUpdateBlog);
